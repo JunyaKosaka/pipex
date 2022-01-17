@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 23:23:59 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/18 01:38:36 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	get_filefd(t_pdata *pdata, int cmd_index)
 		{
 			ft_putstr_fd("pipex: ", STDERR);
 			perror(pdata->argv[1]);
+			free_all(NULL, pdata, false);
 			exit(EXIT_FAILURE);
 		}
 		fd = open(pdata->file, R_OK);
@@ -35,12 +36,9 @@ static int	get_filefd(t_pdata *pdata, int cmd_index)
 	else if (pdata->file)
 	{
 		if (pdata->has_heredoc == false)
-		{
-			unlink(pdata->file);
-			fd = open(pdata->file, O_CREAT | W_OK, 0644);
-		}
+			fd = open(pdata->file, O_CREAT | O_TRUNC | W_OK, 0644);
 		else
-			fd = open(pdata->file, O_APPEND | W_OK | O_CREAT, 0644);
+			fd = open(pdata->file, O_CREAT | O_APPEND | W_OK, 0644);
 	}
 	else
 		fd = NOFILE;
@@ -71,7 +69,6 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 	{
 		perror(pdata->file);
 		free_all(NULL, pdata, false);
-		
 		exit(EXIT_FAILURE);
 	}
 	dup2_func(pdata, filefd, cmd_index);
