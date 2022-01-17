@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:28:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 02:54:44 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 11:36:18 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,25 @@
 #  define BUFFER_SIZE 256
 # endif
 
+/*   process data   */
 typedef struct s_pdata
 {
+	size_t	process_cnt;
 	int		**pipefd;
 	int		argc;
 	char	**envp;
 	char	**cmd_full_path;
 	char	***cmd;
 	char	*file;
-	bool	has_heredoc;
 	char	*total_doc;
+	char	**argv;
+	bool	has_heredoc;
 }	t_pdata;
 
+/*   information   */
 typedef struct	s_info
 {   
 	int		lead_cmd_index;
-	int		process_cnt;
-	char	**argv;
 	pid_t	*pid;
 }	t_info;
 
