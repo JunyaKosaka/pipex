@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/17 02:47:05 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/17 02:59:51 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/17 17:12:29 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= libutil.a
 HEADERFILE	= ../includes/utils.h
 
 SRCS		= error_handler.c get_next_line.c get_next_line_utils.c \
-			free.c \
+			free.c safe_func.c \
 
 OBJS		= $(SRCS:%.c=%.o)
 
@@ -40,5 +40,7 @@ fclean : clean
 	${RM} -f $(NAME)
 
 re : fclean all
+
+
 
 .PHONY : all clean fclean re bonus

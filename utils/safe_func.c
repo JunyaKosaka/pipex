@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   safe_func.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/16 17:25:33 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 17:02:58 by jkosaka          ###   ########.fr       */
+/*   Created: 2022/01/16 22:40:32 by jkosaka           #+#    #+#             */
+/*   Updated: 2022/01/17 17:08:49 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../includes/utils.h"
 
-# include "./utils.h"
-
-void	pipex(int argc, char **argv, char **envp);
-int		exec_processes(t_info *info, t_pdata *pdata);
-void	exec_child(t_pdata *pdata, int cmd_index);
-void	close_func(t_pdata *pdata, int filefd, int cmd_index);
-void	dup2_func(t_pdata *pdata, int filefd, int cmd_index);
-void	convert_to_cmd_fullpath(t_pdata *pdata, int cmd_index);
-
-
-#endif  // PIPEX_H
+int	safe_func(int res, t_pdata *data)
+{
+	if (res == -1)
+	{
+		free_all(NULL, data, true);
+		exit(EXIT_FAILURE);
+	}
+	return (res);
+}

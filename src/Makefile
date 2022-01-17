@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 02:42:37 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/17 03:02:44 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/17 17:11:53 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME		= ../pipex
 
 HEADERFILE	= ../includes/pipex.h
 
-SRCS		= main.c pipex.c
+SRCS		= main.c pipex.c exec_processes.c exec_child.c \
+			close_func.c dup2_func.c cmd_full_path.c \
 
 OBJS		= $(SRCS:%.c=%.o)
 
@@ -46,27 +47,5 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
-
-test:
-	./test.sh
-
-INPUTFILE=small.txt
-CMD1=cat
-CMD2=head -n 4
-CMD3=tail -n 2
-
-my_test: ${NAME}
-	./${NAME} $(INPUTFILE) $(CMD1) "$(CMD2)" "$(CMD3)" file1
-
-original_test:
-	< $(INPUTFILE) $(CMD1) | $(CMD2) | $(CMD3) > file2
-
-# test: fclean retest
-
-# heretest: ${NAME}
-# 	./${NAME} here_doc aaa cat "head -n 1" file
-# 	cat file
-
-# here: fclean heretest
 
 PHONY: fclean clean all re test retest

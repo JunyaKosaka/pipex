@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:28:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 13:36:34 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 14:26:50 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define PIPEIN 0
 # define PIPEOUT 1
 # define NOFILE -2
+# define NOCMD 127
 # define FD_MAX 256
 # define PATH_PREFIX 5
 # define MIN_ARGC 5
@@ -70,5 +71,8 @@ int		free_all(t_info *info, t_pdata *pdata, bool is_error);
 void	free_2d_arr(void **arr);
 void	*free_one(char **s);
 void	*free_two(char **s1, char **s2);
+int		safe_func(int res, t_pdata *data);
+
+
 
 #endif  // UTILS_H
