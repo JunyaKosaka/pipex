@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:04:27 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 16:46:47 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 20:01:29 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	close_func(t_pdata *pdata, int filefd, int cmd_index)
 		close(pdata->pipefd[cmd_index - 1][PIPEOUT]);
 	if (filefd != NOFILE)
 		close(filefd);
-	else // if (cmd_index + info->lead_cmd_index != pdata->argc - 2) // if 以降はなくても良さそう
+	else
 		close(pdata->pipefd[cmd_index][PIPEOUT]);
 }

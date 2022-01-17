@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:25:33 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 17:02:58 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 20:04:38 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,5 @@ void	exec_child(t_pdata *pdata, int cmd_index);
 void	close_func(t_pdata *pdata, int filefd, int cmd_index);
 void	dup2_func(t_pdata *pdata, int filefd, int cmd_index);
 void	convert_to_cmd_fullpath(t_pdata *pdata, int cmd_index);
-
 
 #endif  // PIPEX_H

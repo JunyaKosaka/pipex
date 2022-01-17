@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 17:25:59 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/17 17:21:40 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/17 19:40:33 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ original_test:
 	< $(INPUTFILE) $(CMD1) | $(CMD2) | $(CMD3) > file2
 
 heretest: ${NAME}
-	./${NAME} here_doc aaa cat "head -n 1" file
+	./${NAME} here_doc aaa catx "head -n 1" file
 	cat file
 
 here: fclean heretest

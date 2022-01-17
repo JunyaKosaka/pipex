@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 17:02:58 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 20:16:05 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,28 @@ static void	set_elements(t_info *info, t_pdata *pdata, int cmd_index)
 		pdata->file = pdata->argv[1];
 	else if (cmd_index == pdata->process_cnt - 1)
 		pdata->file = pdata->argv[pdata->argc - 1];
-	pdata->cmd[cmd_index] = ft_split(pdata->argv[info->lead_cmd_index + cmd_index], ' ');
+	pdata->cmd[cmd_index] = \
+		ft_split(pdata->argv[info->lead_cmd_index + cmd_index], ' ');
 	if (!(pdata->cmd[cmd_index]))
 		exit(free_all(info, pdata, true));
 	convert_to_cmd_fullpath(pdata, cmd_index);
 }
 
-/*  execute processes  */
+static int	wait_all_process(t_info *info, t_pdata *pdata)
+{
+	int	cmd_index;
+	int	wstatus;
+
+	cmd_index = 0;
+	while (cmd_index < pdata->process_cnt)
+	{
+		safe_func(waitpid(info->pid[cmd_index], &wstatus, WUNTRACED), pdata);
+		cmd_index++;
+	}
+	return (wstatus);
+}
+
+/*   execute processes  */
 int	exec_processes(t_info *info, t_pdata *pdata)
 {
 	int	wstatus;
@@ -51,20 +66,7 @@ int	exec_processes(t_info *info, t_pdata *pdata)
 		}
 		cmd_index++;
 	}
-	pdata->cmd_full_path[cmd_index] = NULL;
-	cmd_index = 0;
-	while (cmd_index < pdata->process_cnt)
-	{
-		safe_func(waitpid(info->pid[cmd_index], &wstatus, WUNTRACED), pdata);
-		// printf("125: %d %d\n", res, wstatus);
-		// printf("127: %d %d %d\n", cmd_index, WIFEXITED(wstatus), WEXITSTATUS(wstatus));
-		cmd_index++;
-	}
-	// printf("\n");
-	// exit(pdata->error_status);
-	// exit(wstatus);  // 終了ステータス
+	pdata->cmd_fullpath[cmd_index] = NULL;
+	wstatus = wait_all_process(info, pdata);
 	return (WEXITSTATUS(wstatus));
 }
-
-
-

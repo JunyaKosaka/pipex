@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:28:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 14:26:50 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 20:16:05 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <errno.h>
 # include <sys/types.h>
 # include <sys/uio.h>
-# include <malloc/malloc.h> // delete
 
 # define STDIN 0
 # define STDOUT 1
@@ -50,7 +49,7 @@ typedef struct s_pdata
 	int		**pipefd;
 	int		argc;
 	char	**envp;
-	char	**cmd_full_path;
+	char	**cmd_fullpath;
 	char	***cmd;
 	char	*file;
 	char	*total_doc;
@@ -59,8 +58,8 @@ typedef struct s_pdata
 }	t_pdata;
 
 /*   information   */
-typedef struct	s_info
-{   
+typedef struct s_info
+{
 	int		lead_cmd_index;
 	pid_t	*pid;
 }	t_info;
@@ -72,7 +71,5 @@ void	free_2d_arr(void **arr);
 void	*free_one(char **s);
 void	*free_two(char **s1, char **s2);
 int		safe_func(int res, t_pdata *data);
-
-
 
 #endif  // UTILS_H

@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:35:35 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 13:49:41 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 20:16:05 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	get_here_doc(t_pdata *pdata, char *limiter)
 		new_document = ft_strjoin(pdata->total_doc, temp);
 		if (!new_document)
 		{
-			free(temp); // ダブルfree注意
+			free_one(&temp);
 			exit(free_all(NULL, pdata, true));
 		}
 		free(pdata->total_doc);
@@ -41,7 +41,7 @@ static void	get_here_doc(t_pdata *pdata, char *limiter)
 	free(temp);
 }
 
-static void init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
+static void	init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 {
 	size_t	process_cnt;
 
@@ -49,7 +49,7 @@ static void init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 	pdata->envp = envp;
 	pdata->has_heredoc = false;
 	pdata->total_doc = NULL;
-	pdata->cmd_full_path = NULL;
+	pdata->cmd_fullpath = NULL;
 	pdata->argv = argv;
 	if (!ft_strncmp(argv[1], "here_doc", 9))
 	{
@@ -60,10 +60,10 @@ static void init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 	}
 	process_cnt = argc - 3 - pdata->has_heredoc;
 	pdata->process_cnt = process_cnt;
-	pdata->cmd_full_path = (char **)malloc(sizeof(char *) * (process_cnt + 1));
-	if (!pdata->cmd_full_path)
+	pdata->cmd_fullpath = (char **)malloc(sizeof(char *) * (process_cnt + 1));
+	if (!pdata->cmd_fullpath)
 		exit(free_all(NULL, pdata, true));
-	pdata->cmd_full_path[process_cnt] = NULL;
+	pdata->cmd_fullpath[process_cnt] = NULL;
 	pdata->cmd = (char ***)malloc(sizeof(char *) * (process_cnt + 1));
 	if (!pdata->cmd)
 		exit(free_all(NULL, pdata, true));
@@ -81,7 +81,7 @@ static void	init_info(t_info *info, t_pdata *pdata, int argc, bool has_heredoc)
 static void	create_pipe(t_info *info, t_pdata *pdata)
 {
 	size_t	pipe_index;
-	
+
 	pdata->pipefd = (int **)malloc(sizeof(int *) * (pdata->process_cnt));
 	if (!pdata->pipefd)
 		exit(free_all(info, pdata, true));
@@ -105,10 +105,10 @@ void	pipex(int argc, char **argv, char **envp)
 	int			error_status;
 
 	init_pdata(&pdata, argc, argv, envp);
- 	init_info(&info, &pdata, argc, pdata.has_heredoc);
+	init_info(&info, &pdata, argc, pdata.has_heredoc);
 	create_pipe(&info, &pdata);
 	error_status = exec_processes(&info, &pdata);
-	// free_all(&info, false);
-	// // system("leaks -q pipex");
-	// exit(error_status);
+	free_all(&info, &pdata, false);
+	// system("leaks -q pipex");
+	exit(error_status);
 }
