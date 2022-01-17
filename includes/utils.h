@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:28:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 11:36:18 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 13:36:34 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct	s_info
 
 int		error_handler(void);
 char	*get_next_line(int fd);
-int		free_all_info(t_info *info, t_pdata *pdata, bool is_error);
+int		free_all(t_info *info, t_pdata *pdata, bool is_error);
 void	free_2d_arr(void **arr);
 void	*free_one(char **s);
-void	*free_all(char **s1, char **s2);
+void	*free_two(char **s1, char **s2);
 
 #endif  // UTILS_H

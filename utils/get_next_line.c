@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:26:24 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/16 22:35:50 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 13:37:09 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	buff = (char *)malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
 	if (!buff)
-		return (free_all(&save[fd], &buff));
+		return (free_two(&save[fd], &buff));
 	save[fd] = init_save(save[fd]);
 	read_bytes = 1;
 	while (read_bytes && !ft_strchr(save[fd], '\n'))
 	{
 		read_bytes = read(fd, buff, BUFFER_SIZE);
 		if (read_bytes == -1)
-			return (free_all(&save[fd], &buff));
+			return (free_two(&save[fd], &buff));
 		buff[read_bytes] = '\0';
 		save[fd] = join_words(&save[fd], buff);
 		if (!save[fd])

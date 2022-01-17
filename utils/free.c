@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:40:32 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 02:56:08 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 13:35:44 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	free_pdata(t_pdata *pdata)
 	}
 }
 
-int	free_all_info(t_info *info, t_pdata *pdata, bool is_error)
+int	free_all(t_info *info, t_pdata *pdata, bool is_error)
 {
 	if (info)
 		free_info(info);

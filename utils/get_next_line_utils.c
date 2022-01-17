@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:26:24 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/16 22:35:29 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/17 13:36:22 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*free_one(char **s)
 	return (NULL);
 }
 
-void	*free_all(char **s1, char **s2)
+void	*free_two(char **s1, char **s2)
 {
 	free_one(s1);
 	free_one(s2);
