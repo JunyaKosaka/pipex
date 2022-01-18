@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:28:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/18 21:48:40 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:53:58 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 /*   process data   */
 typedef struct s_pdata
 {
-	size_t	process_cnt;
+	int		process_cnt;
 	int		**pipefd;
 	int		argc;
 	char	**envp;

@@ -35,7 +35,19 @@ static void	free_char(char **str)
 	}
 }
 
-static void	conv_fullpath_sub(t_pdata *pdata, int cmd_i, char ***all_paths)
+/*  command not found in all paths  */
+static void	cmd_not_found(t_pdata *pdata, int cmd_i, char ***all_paths)
+{
+	pdata->fullpath_cmd[cmd_i] = ft_strdup("");
+	if (!(pdata->fullpath_cmd[cmd_i]))
+		exit(free_all(NULL, pdata, true));
+	free_2d_arr((void **)(*all_paths));
+	ft_putstr_fd("pipex: command not found: ", STDERR);
+	ft_putendl_fd(pdata->cmd[cmd_i][0], STDERR);
+}
+
+/*  find full path of command in all paths  */
+static void	find_fullpath(t_pdata *pdata, int cmd_i, char ***all_paths)
 {
 	int		path_index;
 	char	*temp;
@@ -58,10 +70,7 @@ static void	conv_fullpath_sub(t_pdata *pdata, int cmd_i, char ***all_paths)
 		}
 		free_char(&(pdata->fullpath_cmd[cmd_i]));
 	}
-	pdata->fullpath_cmd[cmd_i] = ft_strdup("");
-	free_2d_arr((void **)(*all_paths));
-	ft_putstr_fd("pipex: command not found: ", STDERR);
-	ft_putendl_fd(pdata->cmd[cmd_i][0], STDERR);
+	cmd_not_found(pdata, cmd_i, all_paths);
 }
 
 /*   convert command relative path to full path  */
@@ -77,9 +86,9 @@ void	convert_to_fullpath_cmd(t_pdata *pdata, int cmd_index)
 	}
 	env_index = get_path_index(pdata);
 	if (env_index == -1)
-		exit(EXIT_FAILURE);
+		exit(free_all(NULL, pdata, true));
 	all_paths = ft_split(&(pdata->envp[env_index][PATH_PREFIX]), ':');
 	if (!all_paths)
 		exit(free_all(NULL, pdata, true));
-	conv_fullpath_sub(pdata, cmd_index, &all_paths);
+	find_fullpath(pdata, cmd_index, &all_paths);
 }

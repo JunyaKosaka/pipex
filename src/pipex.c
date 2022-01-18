@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:35:35 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/18 21:48:40 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/18 23:13:05 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static void	get_here_doc(t_pdata *pdata, char *limiter)
+static void	get_heredoc(t_pdata *pdata, char *limiter)
 {
 	size_t	len;
 	char	*temp;
@@ -23,9 +23,8 @@ static void	get_here_doc(t_pdata *pdata, char *limiter)
 		exit(error_handler());
 	len = ft_strlen(limiter);
 	limiter[len] = '\n';
-	len++;
-	temp = get_next_line(0);
-	while (ft_strncmp(temp, limiter, len))
+	temp = get_next_line(STDIN);
+	while (ft_strncmp(temp, limiter, len + 1))
 	{
 		new_document = ft_strjoin(pdata->total_doc, temp);
 		if (!new_document)
@@ -33,17 +32,18 @@ static void	get_here_doc(t_pdata *pdata, char *limiter)
 			free_one(&temp);
 			exit(free_all(NULL, pdata, true));
 		}
-		free(pdata->total_doc);
-		free(temp);
+		free_one(&(pdata->total_doc));
+		free_one(&temp);
 		pdata->total_doc = new_document;
-		temp = get_next_line(0);
+		temp = get_next_line(STDIN);
 	}
-	free(temp);
+	free_one(&temp);
 }
 
+/*  initialize process data  */
 static void	init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 {
-	size_t	process_cnt;
+	int	process_cnt;
 
 	pdata->argc = argc;
 	pdata->envp = envp;
@@ -56,7 +56,7 @@ static void	init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 		if (argc < MIN_ARGC + 1)
 			exit(error_handler());
 		pdata->has_heredoc = true;
-		get_here_doc(pdata, argv[2]);
+		get_heredoc(pdata, argv[2]);
 	}
 	process_cnt = argc - 3 - pdata->has_heredoc;
 	pdata->process_cnt = process_cnt;
@@ -64,7 +64,7 @@ static void	init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 	if (!pdata->fullpath_cmd)
 		exit(free_all(NULL, pdata, true));
 	pdata->fullpath_cmd[process_cnt] = NULL;
-	pdata->cmd = (char ***)malloc(sizeof(char *) * (process_cnt + 1));
+	pdata->cmd = (char ***)malloc(sizeof(char **) * (process_cnt + 1));
 	if (!pdata->cmd)
 		exit(free_all(NULL, pdata, true));
 	pdata->cmd[process_cnt] = NULL;
@@ -80,9 +80,9 @@ static void	init_info(t_info *info, t_pdata *pdata, int argc, bool has_heredoc)
 
 static void	create_pipe(t_info *info, t_pdata *pdata)
 {
-	size_t	pipe_index;
+	int	pipe_index;
 
-	pdata->pipefd = (int **)malloc(sizeof(int *) * (pdata->process_cnt));
+	pdata->pipefd = (int **)malloc(sizeof(int *) * (pdata->process_cnt)); // MAX_FDを超える場合
 	if (!pdata->pipefd)
 		exit(free_all(info, pdata, true));
 	pdata->pipefd[pdata->process_cnt - 1] = NULL;
