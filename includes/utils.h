@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:28:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 20:16:05 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:48:40 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct s_pdata
 	int		**pipefd;
 	int		argc;
 	char	**envp;
-	char	**cmd_fullpath;
+	char	**fullpath_cmd;
 	char	***cmd;
 	char	*file;
 	char	*total_doc;

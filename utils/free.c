@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:40:32 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 20:16:05 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:48:40 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	free_pdata(t_pdata *pdata)
 	if (!pdata)
 		return ;
 	free_2d_arr((void **)pdata->pipefd);
-	free_2d_arr((void **)pdata->cmd_fullpath);
+	free_2d_arr((void **)pdata->fullpath_cmd);
 	i = 0;
 	while (pdata->cmd[i])
 	{

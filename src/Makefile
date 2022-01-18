@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 02:42:37 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/18 11:53:26 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/18 21:49:09 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME := ../pipex
 HEADERFILE := ../includes/pipex.h
 
 SRCS := main.c pipex.c exec_processes.c exec_child.c \
-	 close_func.c dup2_func.c cmd_fullpath.c \
+	 close_func.c dup2_func.c fullpath_cmd.c \
 
 OBJS := $(SRCS:%.c=%.o)
 

@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 20:16:05 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/18 21:48:40 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	set_elements(t_info *info, t_pdata *pdata, int cmd_index)
 		ft_split(pdata->argv[info->lead_cmd_index + cmd_index], ' ');
 	if (!(pdata->cmd[cmd_index]))
 		exit(free_all(info, pdata, true));
-	convert_to_cmd_fullpath(pdata, cmd_index);
+	convert_to_fullpath_cmd(pdata, cmd_index);
 }
 
 static int	wait_all_process(t_info *info, t_pdata *pdata)
@@ -66,7 +66,7 @@ int	exec_processes(t_info *info, t_pdata *pdata)
 		}
 		cmd_index++;
 	}
-	pdata->cmd_fullpath[cmd_index] = NULL;
+	pdata->fullpath_cmd[cmd_index] = NULL;
 	wstatus = wait_all_process(info, pdata);
 	return (WEXITSTATUS(wstatus));
 }
