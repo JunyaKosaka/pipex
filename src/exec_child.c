@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/18 01:39:02 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/18 11:54:40 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static int	get_filefd(t_pdata *pdata, int cmd_index)
 	}
 	else if (pdata->file)
 	{
-		if (pdata->has_heredoc == false)
-			fd = open(pdata->file, O_CREAT | O_TRUNC | W_OK, 0644);
-		else
+		if (pdata->has_heredoc)
 			fd = open(pdata->file, O_CREAT | O_APPEND | W_OK, 0644);
+		else
+			fd = open(pdata->file, O_CREAT | O_TRUNC | W_OK, 0644);
 	}
 	else
 		fd = NOFILE;

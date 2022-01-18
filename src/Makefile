@@ -6,42 +6,42 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 02:42:37 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/17 20:16:05 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/18 11:53:26 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= ../pipex
+NAME := ../pipex
 
-HEADERFILE	= ../includes/pipex.h
+HEADERFILE := ../includes/pipex.h
 
-SRCS		= main.c pipex.c exec_processes.c exec_child.c \
-			close_func.c dup2_func.c cmd_fullpath.c \
+SRCS := main.c pipex.c exec_processes.c exec_child.c \
+	 close_func.c dup2_func.c cmd_fullpath.c \
 
-OBJS		= $(SRCS:%.c=%.o)
+OBJS := $(SRCS:%.c=%.o)
 
-LIBUTIL		= ../utils/libutil.a
+LIBUTIL := ../utils/libutil.a
 
-CC			= gcc
+CC := gcc
 
-CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
 
-$(NAME): $(OBJS)
+$(NAME) : $(OBJS)
 	make -C ../utils
 	${CC} ${CFLAGS} ${OBJS} ${LIBUTIL} -o ${NAME}
 
-all: $(NAME)
+all : $(NAME)
 
 %.o : %.c $(HEADERFILE)
 	gcc $(FLAGS) -c $< -o $@
 
 bonus : all
 
-clean:
+clean :
 	make clean -C ../libft
 	make clean -C ../utils
 	$(RM) $(OBJS)
 
-fclean: clean
+fclean : clean
 	make fclean -C ../libft
 	make fclean -C ../utils
 	$(RM) $(NAME)

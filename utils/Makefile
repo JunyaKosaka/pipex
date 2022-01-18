@@ -6,20 +6,20 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/17 02:47:05 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/17 17:12:29 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/18 11:52:20 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= libutil.a
+NAME := libutil.a
 
-HEADERFILE	= ../includes/utils.h
+HEADERFILE := ../includes/utils.h
 
-SRCS		= error_handler.c get_next_line.c get_next_line_utils.c \
-			free.c safe_func.c \
+SRCS := error_handler.c get_next_line.c get_next_line_utils.c \
+	free.c safe_func.c \
 
-OBJS		= $(SRCS:%.c=%.o)
+OBJS := $(SRCS:%.c=%.o)
 
-FLAGS		= -Wall -Wextra -Werror
+FLAGS := -Wall -Wextra -Werror
 
 $(NAME) : $(OBJS)
 	make $(FLAGS) -C ../libft
@@ -40,7 +40,5 @@ fclean : clean
 	${RM} -f $(NAME)
 
 re : fclean all
-
-
 
 .PHONY : all clean fclean re bonus
