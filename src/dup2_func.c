@@ -6,27 +6,28 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:04:27 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/17 20:01:29 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 01:34:21 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
+/*  safe_dup2_func  */
 void	dup2_func(t_pdata *pdata, int filefd, int cmd_index)
 {
 	if (filefd != NOFILE && cmd_index == 0)
 	{
-		dup2(filefd, STDIN);
-		dup2(pdata->pipefd[cmd_index][PIPEOUT], STDOUT);
+		safe_func(dup2(filefd, STDIN), pdata);
+		safe_func(dup2(pdata->pipefd[cmd_index][PIPEOUT], STDOUT), pdata);
 	}
 	else if (filefd != NOFILE)
 	{
-		dup2(pdata->pipefd[cmd_index - 1][PIPEIN], STDIN);
-		dup2(filefd, STDOUT);
+		safe_func(dup2(pdata->pipefd[cmd_index - 1][PIPEIN], STDIN), pdata);
+		safe_func(dup2(filefd, STDOUT), pdata);
 	}
 	else
 	{
-		dup2(pdata->pipefd[cmd_index - 1][PIPEIN], STDIN);
-		dup2(pdata->pipefd[cmd_index][PIPEOUT], STDOUT);
+		safe_func(dup2(pdata->pipefd[cmd_index - 1][PIPEIN], STDIN), pdata);
+		safe_func(dup2(pdata->pipefd[cmd_index][PIPEOUT], STDOUT), pdata);
 	}
 }

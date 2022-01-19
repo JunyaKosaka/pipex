@@ -6,29 +6,41 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 17:11:40 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/10/18 17:11:52 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 01:22:10 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	write_fd(char **s, int fd, size_t len)
+static ssize_t	write_fd(char **s, int fd, size_t len)
 {
-	write(fd, *s, len);
+	ssize_t	bytes;
+
+	bytes = write(fd, *s, len);
 	*s += len;
+	return (bytes);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+/*  return -1 if fail  */
+ssize_t	ft_putstr_fd(char *s, int fd)
 {
 	size_t	len;
+	ssize_t	bytes;
 
 	if (!s)
-		return ;
+		return (0);
 	len = ft_strlen(s);
-	write_fd(&s, fd, len % INT_MAX);
+	bytes = write_fd(&s, fd, len % INT_MAX);
+	if (bytes == -1)
+		return (-1);
 	len /= INT_MAX;
 	while (len--)
-		write_fd(&s, fd, INT_MAX);
+	{
+		bytes = write_fd(&s, fd, INT_MAX);
+		if (bytes == -1)
+			return (-1);
+	}
+	return (bytes);
 }
 
 // #include <stdio.h>

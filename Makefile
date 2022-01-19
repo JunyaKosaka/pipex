@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 17:25:59 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/18 23:12:53 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/20 02:08:49 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ empty :
 test : all
 	./test.sh
 
-INPUTFILE	:= big.txt
+INPUTFILE	:= small.txt
 CMD1		:= cat
 CMD2		:= head -n 4
 CMD3		:= tail -n 2

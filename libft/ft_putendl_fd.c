@@ -6,16 +6,25 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 00:07:23 by jkosaka           #+#    #+#             */
-/*   Updated: 2021/10/18 16:35:04 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 01:42:14 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl_fd(char *s, int fd)
+/*  return -1 if fail  */
+ssize_t	ft_putendl_fd(char *s, int fd)
 {
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
+	ssize_t	bytes;
+	ssize_t	bytes2;
+
+	bytes = ft_putstr_fd(s, fd);
+	if (bytes == -1)
+		return (bytes);
+	bytes2 = write(fd, "\n", 1);
+	if (bytes2 == -1)
+		return (bytes2);
+	return (bytes + bytes2);
 }
 
 // #include <stdio.h>

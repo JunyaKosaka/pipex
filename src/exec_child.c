@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/18 23:30:51 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 01:28:32 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ static void	exec_child_heredoc(t_pdata *pdata)
 	size_t	total_len;
 
 	total_len = ft_strlen(pdata->total_doc);
-	close(pdata->pipefd[0][PIPEIN]);
-	ft_putstr_fd(pdata->total_doc, pdata->pipefd[0][PIPEOUT]);
-	close(pdata->pipefd[0][PIPEOUT]);
+	safe_func(close(pdata->pipefd[0][PIPEIN]), pdata);
+	safe_func(ft_putstr_fd(pdata->total_doc, pdata->pipefd[0][PIPEOUT]), pdata);
+	safe_func(close(pdata->pipefd[0][PIPEOUT]), pdata);
+	free_all(NULL, pdata, false);
 	exit(EXIT_SUCCESS);
 }
 
@@ -74,5 +75,6 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
 	execve(pdata->fullpath_cmd[cmd_index], pdata->cmd[cmd_index], pdata->envp);
+	free_all(NULL, pdata, false);
 	exit(NOCMD);
 }

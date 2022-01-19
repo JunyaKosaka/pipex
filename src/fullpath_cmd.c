@@ -42,8 +42,8 @@ static void	cmd_not_found(t_pdata *pdata, int cmd_i, char ***all_paths)
 	if (!(pdata->fullpath_cmd[cmd_i]))
 		exit(free_all(NULL, pdata, true));
 	free_2d_arr((void **)(*all_paths));
-	ft_putstr_fd("pipex: command not found: ", STDERR);
-	ft_putendl_fd(pdata->cmd[cmd_i][0], STDERR);
+	safe_func(ft_putstr_fd("pipex: command not found: ", STDERR), pdata);
+	safe_func(ft_putendl_fd(pdata->cmd[cmd_i][0], STDERR), pdata);
 }
 
 /*  find full path of command in all paths  */
