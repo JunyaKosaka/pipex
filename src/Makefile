@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 02:42:37 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/18 21:49:09 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/20 02:21:23 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBUTIL := ../utils/libutil.a
 
 CC := gcc
 
-CFLAGS := -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS := -Wall -Wextra -Werror
 
 $(NAME) : $(OBJS)
 	make -C ../utils
