@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 04:10:01 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 04:11:31 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	get_filefd(t_pdata *pdata, int cmd_index)
 		{
 			ft_putstr_fd("pipex: ", STDERR);
 			perror(pdata->argv[1]);
-			free_all(NULL, pdata, false);
 			exit(EXIT_FAILURE);
 		}
 		fd = open(pdata->file, R_OK);
@@ -54,7 +53,6 @@ static void	exec_child_heredoc(t_pdata *pdata)
 	safe_func(close(pdata->pipefd[0][PIPEIN]), pdata);
 	safe_func(ft_putstr_fd(pdata->total_doc, pdata->pipefd[0][PIPEOUT]), pdata);
 	safe_func(close(pdata->pipefd[0][PIPEOUT]), pdata);
-	// free_all(NULL, pdata, false);
 	exit(EXIT_SUCCESS);
 }
 
@@ -69,7 +67,6 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 	if (filefd == -1)
 	{
 		perror(pdata->file);
-		free_all(NULL, pdata, false);
 		exit(EXIT_FAILURE);
 	}
 	dup2_func(pdata, filefd, cmd_index);
