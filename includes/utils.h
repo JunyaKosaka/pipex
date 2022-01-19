@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:28:55 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 01:21:09 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 02:24:06 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@
 # include <sys/wait.h>
 # include <limits.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
-
 # include <errno.h>
-# include <sys/types.h>
-# include <sys/uio.h>
+# include "../libft/libft.h"
 
 # define STDIN 0
 # define STDOUT 1
