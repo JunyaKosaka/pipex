@@ -72,7 +72,6 @@ static void	find_fullpath(t_pdata *pdata, int cmd_i, char ***all_paths)
 		}
 		free_char(&(pdata->fullpath_cmd[cmd_i]));
 	}
-
 	cmd_not_found(pdata, cmd_i, all_paths);
 }
 

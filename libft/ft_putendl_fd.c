@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 00:07:23 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 01:42:14 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 02:49:15 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ ssize_t	ft_putendl_fd(char *s, int fd)
 	bytes = ft_putstr_fd(s, fd);
 	if (bytes == -1)
 		return (bytes);
-	bytes2 = write(fd, "\n", 1);
+	bytes2 = write(fd, "\n", fd);
 	if (bytes2 == -1)
 		return (bytes2);
 	return (bytes + bytes2);
