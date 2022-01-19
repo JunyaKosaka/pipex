@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 01:28:32 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:32:00 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
 	execve(pdata->fullpath_cmd[cmd_index], pdata->cmd[cmd_index], pdata->envp);
-	free_all(NULL, pdata, false);
+	// free_all(NULL, pdata, false);
 	exit(NOCMD);
 }
