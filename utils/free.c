@@ -6,34 +6,34 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:40:32 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 03:38:22 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:46:33 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/utils.h"
 
-void	free_2d_arr(void **arr)
+void	free_2d_arr(void ***arr)
 {
 	int	i;
 
-	if (!arr)
+	if (!arr || !(*arr))
 		return ;
 	i = 0;
-	while (arr[i])
+	while ((*arr)[i])
 	{
-		free(arr[i]);
-		arr[i] = NULL;
+		free((*arr)[i]);
+		(*arr)[i] = NULL;
 		i++;
 	}
-	if (arr[i])
+	if ((*arr)[i])
 	{
-		free(arr[i]);
-		arr[i] = NULL;	
+		free((*arr)[i]);
+		(*arr)[i] = NULL;	
 	}
-	if (arr)
+	if (*arr)
 	{
-		free(arr);
-		arr = NULL;
+		free(*arr);
+		*arr = NULL;
 	}
 }
 
@@ -54,13 +54,13 @@ static void	free_pdata(t_pdata *pdata)
 
 	if (!pdata)
 		return ;
-	free_2d_arr((void **)pdata->pipefd);
-	free_2d_arr((void **)pdata->fullpath_cmd);
+	free_2d_arr((void ***)&(pdata->pipefd));
+	free_2d_arr((void ***)&(pdata->fullpath_cmd));
 	return ; // delete
 	i = 0;
 	while (pdata->cmd[i])
 	{
-		// free_2d_arr((void **)(pdata->cmd[i]));
+		free_2d_arr((void ***)&(pdata->cmd[i]));
 		i++;
 	}
 	if (pdata->cmd[i])
