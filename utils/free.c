@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:40:32 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 03:35:12 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:35:49 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ int	free_all(t_info *info, t_pdata *pdata, bool is_error)
 {
 	if (info)
 		free_info(info);
-	if (pdata)
-		free_pdata(pdata);
+	// if (pdata)
+	// 	free_pdata(pdata);
 	if (is_error)
 		return (error_handler());
 	return (0);
