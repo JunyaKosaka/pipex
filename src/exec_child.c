@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 03:51:26 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:58:10 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	exec_child_heredoc(t_pdata *pdata)
 	safe_func(close(pdata->pipefd[0][PIPEIN]), pdata);
 	safe_func(ft_putstr_fd(pdata->total_doc, pdata->pipefd[0][PIPEOUT]), pdata);
 	safe_func(close(pdata->pipefd[0][PIPEOUT]), pdata);
-	// free_all(NULL, pdata, false);
+	free_all(NULL, pdata, false);
 	exit(EXIT_SUCCESS);
 }
 

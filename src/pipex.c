@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:35:35 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 02:12:43 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:55:23 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ void	pipex(int argc, char **argv, char **envp)
 	create_pipe(&info, &pdata);
 	error_status = exec_processes(&info, &pdata);
 	free_all(&info, &pdata, false);
+	system("leaks pipex");
 	exit(error_status);
 }
