@@ -6,13 +6,13 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 17:25:59 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/20 02:21:55 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/20 07:22:54 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:= pipex
+NAME := pipex
 
-PIPEX_DIR	:= ./src
+PIPEX_DIR := ./src
 
 $(NAME) : empty
 	make -C $(PIPEX_DIR)
