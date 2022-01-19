@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:35:35 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 02:09:42 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 02:12:43 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	create_pipe(t_info *info, t_pdata *pdata)
 {
 	int	pipe_index;
 
-	pdata->pipefd = (int **)malloc(sizeof(int *) * (pdata->process_cnt)); // MAX_FDを超える場合
+	pdata->pipefd = (int **)malloc(sizeof(int *) * (pdata->process_cnt));
 	if (!pdata->pipefd)
 		exit(free_all(info, pdata, true));
 	pdata->pipefd[pdata->process_cnt - 1] = NULL;
@@ -109,6 +109,5 @@ void	pipex(int argc, char **argv, char **envp)
 	create_pipe(&info, &pdata);
 	error_status = exec_processes(&info, &pdata);
 	free_all(&info, &pdata, false);
-	// system("leaks -q pipex");
 	exit(error_status);
 }
