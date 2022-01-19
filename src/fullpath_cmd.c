@@ -44,8 +44,8 @@ static void	cmd_not_found(t_pdata *pdata, int cmd_i, char ***all_paths)
 	// 下のどこかでダブルfree
 	// if (all_paths && *all_paths)
 	// 	free_2d_arr((void **)(*all_paths));
-	safe_func(ft_putstr_fd("pipex: command not found: ", STDERR), pdata);
-	safe_func(ft_putendl_fd(pdata->cmd[cmd_i][0], STDERR), pdata);
+	// safe_func(ft_putstr_fd("pipex: command not found: ", STDERR), pdata);
+	// safe_func(ft_putendl_fd(pdata->cmd[cmd_i][0], STDERR), pdata);
 }
 
 /*  find full path of command in all paths  */
