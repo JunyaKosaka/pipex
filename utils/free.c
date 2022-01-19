@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:40:32 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/20 03:29:33 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 03:30:33 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ static void	free_pdata(t_pdata *pdata)
 		pdata->cmd[i] = NULL;	
 	}
 	if (pdata->cmd)
-	[
+	{
 		free(pdata->cmd);
 		pdata->cmd = NULL;	
-	]
+	}
 	if (pdata->total_doc)
 	{
 		free(pdata->total_doc);
