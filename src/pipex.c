@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:35:35 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 09:52:30 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:30:55 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 	pdata->envp = envp;
 	pdata->has_heredoc = false;
 	pdata->total_doc = NULL;
-	pdata->fullpath_cmd = NULL;
+	// pdata->fullpath_cmd = NULL;
 	pdata->argv = argv;
 	if (!ft_strncmp(argv[1], "here_doc", 9))
 	{
@@ -60,14 +60,14 @@ static void	init_pdata(t_pdata *pdata, int argc, char **argv, char **envp)
 	}
 	process_cnt = argc - 3 - pdata->has_heredoc;
 	pdata->process_cnt = process_cnt;
-	pdata->fullpath_cmd = (char **)malloc(sizeof(char *) * (process_cnt + 1));
-	if (!pdata->fullpath_cmd)
-		exit(free_all(NULL, pdata, true));
-	pdata->fullpath_cmd[process_cnt] = NULL;
-	pdata->cmd = (char ***)malloc(sizeof(char **) * (process_cnt + 1));
-	if (!pdata->cmd)
-		exit(free_all(NULL, pdata, true));
-	pdata->cmd[process_cnt] = NULL;
+	// pdata->fullpath_cmd = (char **)malloc(sizeof(char *) * (process_cnt + 1));
+	// if (!pdata->fullpath_cmd)
+	// 	exit(free_all(NULL, pdata, true));
+	// pdata->fullpath_cmd[process_cnt] = NULL;
+	// pdata->cmd = (char ***)malloc(sizeof(char **) * (process_cnt + 1));
+	// if (!pdata->cmd)
+	// 	exit(free_all(NULL, pdata, true));
+	// pdata->cmd[process_cnt] = NULL;
 }
 
 static void	init_info(t_info *info, t_pdata *pdata, int argc, bool has_heredoc)

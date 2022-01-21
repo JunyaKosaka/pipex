@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 14:23:58 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:31:54 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	exec_processes(t_info *info, t_pdata *pdata)
 		}
 		cmd_index++;
 	}
-	pdata->fullpath_cmd[cmd_index] = NULL;
+	// pdata->fullpath_cmd[cmd_index] = NULL;
 	wstatus = wait_all_process(info, pdata);
 	return (WEXITSTATUS(wstatus));
 }
