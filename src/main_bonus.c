@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 17:25:51 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 16:12:38 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/20 02:12:03 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	if (argc != MIN_ARGC)
+	if (argc < MIN_ARGC)
 		exit(error_handler());
 	pipex(argc, argv, envp);
 	return (0);
