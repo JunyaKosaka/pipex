@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 10:00:00 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 10:41:13 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-bool	is_valid_file(t_pdata *data)
+static bool	is_valid_file(t_pdata *data)
 {
 	return (access(data->argv[1], R_OK) == 0);
 }
@@ -55,6 +55,18 @@ static void	exec_child_heredoc(t_pdata *pdata)
 	exit(EXIT_SUCCESS);
 }
 
+static void	get_cmd(t_pdata *pdata, int cmd_index)
+{
+	int	cmd_arg_index;
+
+	cmd_arg_index = 2 + pdata->has_heredoc + cmd_index;
+	pdata->cmd[cmd_index] = ft_split(pdata->argv[cmd_arg_index], ' ');
+	if (!(pdata->cmd[cmd_index]))
+		exit(EXIT_FAILURE);
+		// exit(free_all(info, pdata, true));
+	convert_to_fullpath_cmd(pdata, cmd_index);
+}
+
 /*  execute child process  */
 void	exec_child(t_pdata *pdata, int cmd_index)
 {
@@ -68,7 +80,8 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 		perror(pdata->file);
 		exit(EXIT_FAILURE);
 	}
-	// ここでget_command、上のexec_child_heredocに注意
+	get_cmd(pdata, cmd_index);
+	// ここでget_command、
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
 	execve(pdata->fullpath_cmd[cmd_index], pdata->cmd[cmd_index], pdata->envp);

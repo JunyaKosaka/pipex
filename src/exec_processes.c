@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 09:56:30 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 10:39:22 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	set_elements(t_info *info, t_pdata *pdata, int cmd_index)
 		pdata->file = pdata->argv[1];
 	else if (cmd_index == pdata->process_cnt - 1)
 		pdata->file = pdata->argv[pdata->argc - 1];
-	pdata->cmd[cmd_index] = \
-		ft_split(pdata->argv[info->lead_cmd_index + cmd_index], ' ');
-	if (!(pdata->cmd[cmd_index]))
-		exit(free_all(info, pdata, true));
-	convert_to_fullpath_cmd(pdata, cmd_index);
+	// pdata->cmd[cmd_index] = \
+	// 	ft_split(pdata->argv[info->lead_cmd_index + cmd_index], ' ');
+	// if (!(pdata->cmd[cmd_index]))
+	// 	exit(free_all(info, pdata, true));
+	// convert_to_fullpath_cmd(pdata, cmd_index);
 }
 
 static int	wait_all_process(t_info *info, t_pdata *pdata)
