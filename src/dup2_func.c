@@ -6,13 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 14:04:27 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 14:23:03 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:48:20 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-/*  safe_dup2_func  */
+/*  safe dup2 func  */
 void	dup2_func(t_pdata *pdata, int filefd, int cmd_index)
 {
 	if (filefd != NOFILE && cmd_index == 0)

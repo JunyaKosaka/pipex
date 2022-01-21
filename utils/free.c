@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 22:40:32 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 14:30:30 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:49:05 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,9 @@ static void	free_info(t_info *info)
 
 static void	free_pdata(t_pdata *pdata)
 {
-	// int	i;
-
 	if (!pdata)
 		return ;
 	free_2d_arr((void ***)&(pdata->pipefd));
-	// free_2d_arr((void ***)&(pdata->fullpath_cmd));
-	// i = 0;
-	// while (pdata->cmd[i])
-	// {
-	// 	free_2d_arr((void ***)&(pdata->cmd[i]));
-	// 	i++;
-	// }
-	// free(pdata->cmd[i]);
-	// pdata->cmd[i] = NULL;
-	// free(pdata->cmd);
-	// pdata->cmd = NULL;
 	free(pdata->total_doc);
 	pdata->total_doc = NULL;
 }
