@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 15:10:54 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 15:11:44 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,10 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 	cmd = get_cmd(pdata, cmd_index);
 	fullpath_cmd = get_fullpath_cmd(pdata, cmd, cmd_index);
 	if (!fullpath_cmd)
+	{
+		printf("exec_child 89\n");
 		exit(NOCMD);
+	}
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
 	execve(fullpath_cmd, cmd, pdata->envp);
