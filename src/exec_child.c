@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 15:15:15 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 23:42:06 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	exec_child_heredoc(t_pdata *pdata)
 	exit(EXIT_SUCCESS);
 }
 
+/*  get command from argv  */
 static char	**get_cmd(t_pdata *pdata, int cmd_index)
 {
 	int		cmd_arg_index;
