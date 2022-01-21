@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 09:50:51 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 09:56:30 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ static void	create_pipe(t_pdata *pdata, int cmd_index)
 	pdata->pipefd[cmd_index] = (int *)malloc(sizeof(int) * 2);
 	if (!pdata->pipefd[cmd_index])
 		exit(EXIT_FAILURE);
-		// exit(free_all(info, pdata, true));
 	if (pipe(pdata->pipefd[cmd_index]) < 0)
 		exit(EXIT_FAILURE);
-		// exit(free_all(info, pdata, true));
 }
 
 /*   execute processes  */

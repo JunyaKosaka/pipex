@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 09:55:18 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 10:00:00 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 		perror(pdata->file);
 		exit(EXIT_FAILURE);
 	}
+	// ここでget_command、上のexec_child_heredocに注意
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
 	execve(pdata->fullpath_cmd[cmd_index], pdata->cmd[cmd_index], pdata->envp);
