@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 17:25:59 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/20 07:22:54 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/21 09:15:00 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,5 +30,25 @@ fclean :
 re : fclean all
 
 empty :
-	
+
+test:
+	./test.sh
+
+INPUTFILE=big.txt
+CMD1=cat
+CMD2=head -n 4
+CMD3=tail -n 2
+
+my_test: ${NAME}
+	./${NAME} $(INPUTFILE) $(CMD1) "$(CMD2)" "$(CMD3)" file1
+
+original_test:
+	< $(INPUTFILE) $(CMD1) | $(CMD2) | $(CMD3) > file2
+
+heretest: ${NAME}
+	./${NAME} here_doc aaa catx "head -n 1" file
+	cat file
+
+here: fclean heretest
+
 .PHONY: all clean fclean re bonus empty
