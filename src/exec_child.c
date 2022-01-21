@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 10:41:13 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:28:40 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,29 +49,32 @@ static void	exec_child_heredoc(t_pdata *pdata)
 	size_t	total_len;
 
 	total_len = ft_strlen(pdata->total_doc);
-	safe_func(close(pdata->pipefd[0][PIPEIN]), pdata);
-	safe_func(ft_putstr_fd(pdata->total_doc, pdata->pipefd[0][PIPEOUT]), pdata);
-	safe_func(close(pdata->pipefd[0][PIPEOUT]), pdata);
+	safe_func(close(pdata->pipefd[0][PIPEIN]));
+	safe_func(ft_putstr_fd(pdata->total_doc, pdata->pipefd[0][PIPEOUT]));
+	safe_func(close(pdata->pipefd[0][PIPEOUT]));
 	exit(EXIT_SUCCESS);
 }
 
-static void	get_cmd(t_pdata *pdata, int cmd_index)
+static char	**get_cmd(t_pdata *pdata, int cmd_index)
 {
-	int	cmd_arg_index;
+	int		cmd_arg_index;
+	char	**cmd;
 
 	cmd_arg_index = 2 + pdata->has_heredoc + cmd_index;
-	pdata->cmd[cmd_index] = ft_split(pdata->argv[cmd_arg_index], ' ');
-	if (!(pdata->cmd[cmd_index]))
+	cmd = ft_split(pdata->argv[cmd_arg_index], ' ');
+	if (!cmd)
 		exit(EXIT_FAILURE);
-		// exit(free_all(info, pdata, true));
-	convert_to_fullpath_cmd(pdata, cmd_index);
+	return (cmd);
 }
 
 /*  execute child process  */
 void	exec_child(t_pdata *pdata, int cmd_index)
 {
 	int		filefd;
-
+	char	**cmd;
+	char	*fullpath_cmd;
+	// char	**cmd;を子プロセスで作る
+	
 	if (pdata->has_heredoc && cmd_index == 0)
 		exec_child_heredoc(pdata);
 	filefd = get_filefd(pdata, cmd_index);
@@ -80,10 +83,12 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 		perror(pdata->file);
 		exit(EXIT_FAILURE);
 	}
-	get_cmd(pdata, cmd_index);
-	// ここでget_command、
+	cmd = get_cmd(pdata, cmd_index);
+	// printf("cmd[0] %s\n", cmd[0]);
+	fullpath_cmd = get_fullpath_cmd(pdata, cmd, cmd_index);
+	// ここでget_command、と get_fullpath_cmd;
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
-	execve(pdata->fullpath_cmd[cmd_index], pdata->cmd[cmd_index], pdata->envp);
+	execve(fullpath_cmd, cmd, pdata->envp);
 	exit(NOCMD);
 }

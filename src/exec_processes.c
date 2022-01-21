@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 10:39:22 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:23:58 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	wait_all_process(t_info *info, t_pdata *pdata)
 	cmd_index = 0;
 	while (cmd_index < pdata->process_cnt)
 	{
-		safe_func(waitpid(info->pid[cmd_index], &wstatus, WUNTRACED), pdata);
+		safe_func(waitpid(info->pid[cmd_index], &wstatus, WUNTRACED));
 		cmd_index++;
 	}
 	return (wstatus);
@@ -69,8 +69,8 @@ int	exec_processes(t_info *info, t_pdata *pdata)
 			exec_child(pdata, cmd_index);
 		else if (cmd_index)
 		{
-			safe_func(close(pdata->pipefd[cmd_index - 1][PIPEIN]), pdata);
-			safe_func(close(pdata->pipefd[cmd_index - 1][PIPEOUT]), pdata);
+			safe_func(close(pdata->pipefd[cmd_index - 1][PIPEIN]));
+			safe_func(close(pdata->pipefd[cmd_index - 1][PIPEOUT]));
 		}
 		cmd_index++;
 	}
