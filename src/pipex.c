@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:35:35 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 14:48:05 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:51:11 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	init_info(t_info *info, t_pdata *pdata, int argc, bool has_heredoc)
 		exit(free_all(info, pdata, true));
 }
 
-static void	create_pipe(t_info *info, t_pdata *pdata)
+static void	prepare_pipe(t_info *info, t_pdata *pdata)
 {
 	int	pipe_index;
 
@@ -87,7 +87,7 @@ void	pipex(int argc, char **argv, char **envp)
 
 	init_pdata(&pdata, argc, argv, envp);
 	init_info(&info, &pdata, argc, pdata.has_heredoc);
-	create_pipe(&info, &pdata);
+	prepare_pipe(&info, &pdata);
 	error_status = exec_processes(&info, &pdata);
 	free_all(&info, &pdata, false);
 	// system("leaks pipex");
