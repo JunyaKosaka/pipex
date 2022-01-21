@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 09:31:55 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 09:50:51 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,10 @@ int	exec_processes(t_info *info, t_pdata *pdata)
 			exit(free_all(info, pdata, true));
 		else if (info->pid[cmd_index] == 0)
 			exec_child(pdata, cmd_index);
-		else
+		else if (cmd_index)
 		{
-			if (cmd_index)
-			{
-				safe_func(close(pdata->pipefd[cmd_index - 1][PIPEIN]), pdata);
-				safe_func(close(pdata->pipefd[cmd_index - 1][PIPEOUT]), pdata);
-			}
+			safe_func(close(pdata->pipefd[cmd_index - 1][PIPEIN]), pdata);
+			safe_func(close(pdata->pipefd[cmd_index - 1][PIPEOUT]), pdata);
 		}
 		cmd_index++;
 	}
