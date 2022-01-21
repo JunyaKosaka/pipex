@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 13:42:16 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 14:38:10 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:41:31 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static char	*get_fullcmd_core(t_pdata *pdata, char **cmd, char **all_paths)
 			return (fullcmd);
 		free_char(&fullcmd);
 	}
+	perror(cmd[0]);
 	safe_func(ft_putstr_fd("pipex: command not found: ", STDERR));
 	safe_func(ft_putendl_fd(cmd[0], STDERR));
 	exit(EXIT_FAILURE);
