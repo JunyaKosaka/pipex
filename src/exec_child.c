@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 14:28:40 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 14:37:01 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 	int		filefd;
 	char	**cmd;
 	char	*fullpath_cmd;
-	// char	**cmd;を子プロセスで作る
 	
 	if (pdata->has_heredoc && cmd_index == 0)
 		exec_child_heredoc(pdata);
@@ -84,9 +83,9 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 		exit(EXIT_FAILURE);
 	}
 	cmd = get_cmd(pdata, cmd_index);
-	// printf("cmd[0] %s\n", cmd[0]);
 	fullpath_cmd = get_fullpath_cmd(pdata, cmd, cmd_index);
-	// ここでget_command、と get_fullpath_cmd;
+	if (!fullpath_cmd)
+		exit(EXIT_FAILURE);
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
 	execve(fullpath_cmd, cmd, pdata->envp);
