@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/16 20:35:35 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 09:30:21 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/21 09:52:30 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,6 @@ static void	create_pipe(t_info *info, t_pdata *pdata)
 	if (!pdata->pipefd)
 		exit(free_all(info, pdata, true));
 	pdata->pipefd[pdata->process_cnt - 1] = NULL;
-	// 分ける
-	// pipe_index = 0;
-	// while (pipe_index < pdata->process_cnt - 1)
-	// {
-	// 	pdata->pipefd[pipe_index] = (int *)malloc(sizeof(int) * 2);
-	// 	if (!pdata->pipefd[pipe_index])
-	// 		exit(free_all(info, pdata, true));
-	// 	if (pipe(pdata->pipefd[pipe_index]) < 0)
-	// 		exit(free_all(info, pdata, true));
-	// 	pipe_index++;
-	// }
 }
 
 void	pipex(int argc, char **argv, char **envp)
