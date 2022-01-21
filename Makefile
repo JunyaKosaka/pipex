@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 17:25:59 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/21 09:15:00 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/21 09:23:59 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,10 @@ my_test: ${NAME}
 original_test:
 	< $(INPUTFILE) $(CMD1) | $(CMD2) | $(CMD3) > file2
 
-heretest: ${NAME}
-	./${NAME} here_doc aaa catx "head -n 1" file
+here: ${NAME}
+	./${NAME} here_doc EOS cat "head -n 1" file
 	cat file
 
-here: fclean heretest
+# here: fclean heretest
 
 .PHONY: all clean fclean re bonus empty
