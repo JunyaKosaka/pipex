@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 13:42:16 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 15:15:18 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/22 14:06:58 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*get_fullcmd_core(t_pdata *pdata, char **cmd, char **all_paths)
 }
 
 /*  return (NULL) if fail  */
-char	*get_fullpath_cmd(t_pdata *pdata, char **cmd, int cmd_index)
+char	*get_fullpath_cmd(t_pdata *pdata, char **cmd)
 {
 	char	**all_paths;
 	int		env_index;

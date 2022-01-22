@@ -6,14 +6,13 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 13:41:48 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 14:45:53 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/22 14:03:57 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-/*   set file  */
-static void	set_file(t_info *info, t_pdata *pdata, int cmd_index)
+static void	set_file(t_info *info, t_pdata *pdata, const int cmd_index)
 {
 	pdata->file = NULL;
 	if (!cmd_index && !(pdata->has_heredoc))
@@ -36,7 +35,7 @@ static int	wait_all_process(t_info *info, t_pdata *pdata)
 	return (wstatus);
 }
 
-static void	create_pipe(t_pdata *pdata, int cmd_index)
+static void	create_pipe(t_pdata *pdata, const int cmd_index)
 {
 	pdata->pipefd[cmd_index] = (int *)malloc(sizeof(int) * 2);
 	if (!pdata->pipefd[cmd_index])

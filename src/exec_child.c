@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/21 23:42:06 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/22 14:07:42 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static bool	is_valid_file(t_pdata *data)
 }
 
 /*  return -1 if open func fails  */
-static int	get_filefd(t_pdata *pdata, int cmd_index)
+static int	get_filefd(t_pdata *pdata, const int cmd_index)
 {
 	int	fd;
 
@@ -56,7 +56,7 @@ static void	exec_child_heredoc(t_pdata *pdata)
 }
 
 /*  get command from argv  */
-static char	**get_cmd(t_pdata *pdata, int cmd_index)
+static char	**get_cmd(t_pdata *pdata, const int cmd_index)
 {
 	int		cmd_arg_index;
 	char	**cmd;
@@ -69,7 +69,7 @@ static char	**get_cmd(t_pdata *pdata, int cmd_index)
 }
 
 /*  execute child process  */
-void	exec_child(t_pdata *pdata, int cmd_index)
+void	exec_child(t_pdata *pdata, const int cmd_index)
 {
 	int		filefd;
 	char	**cmd;
@@ -84,7 +84,7 @@ void	exec_child(t_pdata *pdata, int cmd_index)
 		exit(EXIT_FAILURE);
 	}
 	cmd = get_cmd(pdata, cmd_index);
-	fullpath_cmd = get_fullpath_cmd(pdata, cmd, cmd_index);
+	fullpath_cmd = get_fullpath_cmd(pdata, cmd);
 	dup2_func(pdata, filefd, cmd_index);
 	close_func(pdata, filefd, cmd_index);
 	execve(fullpath_cmd, cmd, pdata->envp);
