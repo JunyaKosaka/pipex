@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 17:25:59 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/21 20:14:02 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/23 11:17:04 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,13 +40,13 @@ CMD1=cat
 CMD2=head -n 4
 CMD3=tail -n 2
 
-my_test: $(NAME)
+my_test: bonus
 	./$(NAME) $(INPUTFILE) $(CMD1) "$(CMD2)" "$(CMD3)" file1
 
 original_test:
 	< $(INPUTFILE) $(CMD1) | $(CMD2) | $(CMD3) > file2
 
-here: $(NAME)
+here: bonus
 	./$(NAME) here_doc EOS cat "head -n 1" file
 	cat file
 

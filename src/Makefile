@@ -6,7 +6,7 @@
 #    By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/17 02:42:37 by jkosaka           #+#    #+#              #
-#    Updated: 2022/01/21 20:12:40 by jkosaka          ###   ########.fr        #
+#    Updated: 2022/01/23 11:16:02 by jkosaka          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,10 +50,6 @@ all : $(NAME)
 
 bonus :
 	make WITH_BONUS=1
-
-# $(OBJS) $(BNS_OBJS)
-# 	make -C ../utils
-# 	${CC} ${CFLAGS} ${OBJS} $(BNS_OBJS) ${LIBUTIL} -o ${NAME}
 
 clean :
 	make clean -C ../libft
