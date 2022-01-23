@@ -6,7 +6,7 @@
 /*   By: jkosaka <jkosaka@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:02:25 by jkosaka           #+#    #+#             */
-/*   Updated: 2022/01/22 14:07:42 by jkosaka          ###   ########.fr       */
+/*   Updated: 2022/01/23 11:27:10 by jkosaka          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	get_filefd(t_pdata *pdata, const int cmd_index)
 	{
 		if (!is_valid_file(pdata))
 		{
+			ft_putstr_fd("pipex: ", STDERR);
 			perror(pdata->argv[1]);
 			exit(EXIT_FAILURE);
 		}
